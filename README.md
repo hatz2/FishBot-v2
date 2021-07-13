@@ -5,7 +5,7 @@
  * No need to use BladeTiger's packetlogger.
  * It should not crash because of the packetlogger.
  * Overall perfomance should be improved.
- * The bot won't use the EXP skill when you're already at the maximun job level.
+ * The bot won't use the EXP skill when you're already at the maximum job level.
  * Start the bot with F5
  * Stop the bot with F8
  * Close the bot with F12
