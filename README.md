@@ -13,5 +13,5 @@
 
  ## How to use it
  You have to ways of injecting the bot:
- 1. Use the provided Injector to inject the dll into all the target processes
+ 1. Use the provided Injector to inject the dll into all the target processes. Remember that the Injector and the FishBot.dll must be in the same folder.
  2. If you don't want it to be injected on all the processes you can manually inject it with whatever injector you want.
