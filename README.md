@@ -1,5 +1,5 @@
 # FishBot v2
- Fish SP bot for the MMORPG Nostale. This version is an improved version of [1]: https://github.com/hatz02/FishBot
+ Fish SP bot for the MMORPG Nostale written in C++. This version is an improved version of: https://github.com/hatz02/FishBot
 
  ## Improvements
  * No need to use Bladetiger's packetlogger.
