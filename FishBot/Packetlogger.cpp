@@ -19,10 +19,6 @@ void __declspec(naked) CustomRecv()
 	{
 		pushad;
 		pushfd;
-	}
-
-	__asm
-	{
 		mov packet, edx;
 	}
 
