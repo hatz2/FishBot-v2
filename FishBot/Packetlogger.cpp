@@ -11,6 +11,7 @@ DWORD TNTClient;
 DWORD originalCallAddy;
 DWORD jmpBackAddy;
 BYTE originalBytes[10]{ 0 };
+char* packet;
 
 void __declspec(naked) CustomRecv()
 {
@@ -19,8 +20,6 @@ void __declspec(naked) CustomRecv()
 		pushad;
 		pushfd;
 	}
-
-	LPSTR packet;
 
 	__asm
 	{
