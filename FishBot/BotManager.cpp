@@ -23,7 +23,7 @@ BotManager::BotManager()
 
 	spLevel = (int8_t*)(***(DWORD***)(Memory::FindPattern(
 		(char*)"\xA1\x00\x00\x00\x00\x8B\x00\x33\xD2\xE8\x00\x00\x00\x00\xB3\x01\xA1\x00\x00\x00\x00\x8B\x00\xE8\x00\x00\x00\x00\x84\xC0\x74\x21",
-		(char*)"x????xxxxx????xxx????xxx????xxxx") + 1) + 0x1AC);
+		(char*)"x????xxxxx????xxx????xxx????xxxx") + 1) + 0x1B4);
 
 	haveBait = true;
 	enabled = false;
