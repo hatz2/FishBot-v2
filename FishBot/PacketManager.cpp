@@ -7,12 +7,15 @@
 BotManager* botManager;
 
 std::vector<std::string> split(std::string str, char pattern);
-void HandleSayi(std::vector <std::string> packetSplitted);
-void HandleSay(std::vector <std::string> packetSplitted);
-void HandleSr(std::vector <std::string> packetSplitted);
-void HandleGuri(std::vector <std::string> packetSplitted);
-void HandleSu(std::vector <std::string> packetSplitted);
-void HandleEff(std::vector <std::string> packetSplitted);
+void HandleSayi(const std::vector<std::string>& packetSplitted);
+void HandleSay(const std::vector<std::string>& packetSplitted);
+void HandleSr(const std::vector<std::string>& packetSplitted);
+void HandleGuri(const std::vector<std::string>& packetSplitted);
+void HandleSu(const std::vector<std::string>& packetSplitted);
+void HandleEff(const std::vector<std::string>& packetSplitted);
+void HandleCMap(const std::vector<std::string>& packetSplitted);
+void HandleTp(const std::vector<std::string>& packetSplitted);
+
 
 void PacketManager::Initialize(BotManager* botMan)
 {
@@ -43,6 +46,10 @@ void PacketManager::HandlePacket(std::string packet)
         HandleSu(packetSplitted);
     else if (opcode == "eff")
         HandleEff(packetSplitted);
+    else if (opcode == "c_map")
+        HandleCMap(packetSplitted);
+    else if (opcode == "tp")
+        HandleTp(packetSplitted);
 }
 
 std::vector<std::string> split(std::string str, char pattern) {
@@ -62,7 +69,7 @@ std::vector<std::string> split(std::string str, char pattern) {
     return results;
 }
 
-void HandleSayi(std::vector <std::string> packetSplitted)
+void HandleSayi(const std::vector<std::string>& packetSplitted)
 {
     if (!botManager->isRunning()) return;
     if (packetSplitted.size() < 5) return;
@@ -74,7 +81,7 @@ void HandleSayi(std::vector <std::string> packetSplitted)
     botManager->noMoreBait();
 }
 
-void HandleSay(std::vector <std::string> packetSplitted)
+void HandleSay(const std::vector<std::string>& packetSplitted)
 {
     if (!botManager->isRunning()) return;
     if (packetSplitted.size() < 6) return;
@@ -88,7 +95,7 @@ void HandleSay(std::vector <std::string> packetSplitted)
     botManager->startFishing();
 }
 
-void HandleSr(std::vector <std::string> packetSplitted)
+void HandleSr(const std::vector<std::string>& packetSplitted)
 {
     if (packetSplitted.size() < 2) return;
 
@@ -97,7 +104,7 @@ void HandleSr(std::vector <std::string> packetSplitted)
     botManager->updateCooldown(skillID);
 }
 
-void HandleGuri(std::vector <std::string> packetSplitted)
+void HandleGuri(const std::vector<std::string>& packetSplitted)
 {
     if (!botManager->isRunning()) return;
     if (packetSplitted.size() < 5) return;
@@ -126,7 +133,7 @@ void HandleGuri(std::vector <std::string> packetSplitted)
     }
 }
 
-void HandleSu(std::vector <std::string> packetSplitted)
+void HandleSu(const std::vector<std::string>& packetSplitted)
 {
     if (packetSplitted.size() < 16) return;
 
@@ -139,7 +146,7 @@ void HandleSu(std::vector <std::string> packetSplitted)
     }
 }
 
-void HandleEff(std::vector <std::string> packetSplitted)
+void HandleEff(const std::vector<std::string>& packetSplitted)
 {
     if (packetSplitted.size() < 4) return;
     if (packetSplitted[1] != "1") return;
@@ -147,4 +154,31 @@ void HandleEff(std::vector <std::string> packetSplitted)
     if (packetSplitted[3] != "8") return;
 
     botManager->resetSkillCD();
+}
+
+void HandleCMap(const std::vector<std::string>& packetSplitted)
+{
+    if (packetSplitted.size() < 4)
+        return;
+
+    if (packetSplitted[3] != "1")
+        return;
+
+    Console::showBotStopped();
+    botManager->stop();
+}
+
+void HandleTp(const std::vector<std::string>& packetSplitted)
+{
+    if (packetSplitted.size() < 6)
+        return;
+
+    if (packetSplitted[1] != "1")
+        return;
+
+    if (packetSplitted[2] != std::to_string(botManager->getPlayerID()))
+        return;
+
+    Console::showBotStopped();
+    botManager->stop();
 }

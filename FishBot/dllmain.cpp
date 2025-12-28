@@ -30,6 +30,7 @@ DWORD WINAPI MainThread(LPVOID param)
         fclose(file);
 
     FreeConsole();
+    FreeLibrary((HMODULE)param);
     return 0;
 }
 
